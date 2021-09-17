@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
     // logic to get all posts and related user and comment data
     Post.findAll({
         attributes: [
+            'id',
             'title',
             'post_content',
             'created_at'
@@ -15,17 +16,21 @@ router.get('/', (req, res) => {
             {
                 model: User,
                 attributes: [
+                    'id',
                     'username'
                 ]
             },
             {
                 model: Comment,
                 attributes: [
-                    'comment_content'
+                    'id',
+                    'comment_content',
+                    'created_at'
                 ],
                 include: {
                     model: User,
                     attributes: [
+                        'id',
                         'username'
                     ]
                 }
@@ -47,6 +52,7 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         attributes: [
+            'id',
             'title',
             'post_content',
             'created_at'
@@ -55,7 +61,25 @@ router.get('/:id', (req, res) => {
             {
                 model: User,
                 attributes: [
+                    'id',
                     'username'
+                ]
+            },
+            {
+                model: Comment,
+                attributes: [
+                    'id',
+                    'comment_content',
+                    'created_at'
+                ],
+                include: [
+                    {
+                        model: User,
+                        attributes: [
+                            'id',
+                            'username'
+                        ]
+                    }
                 ]
             }
         ]

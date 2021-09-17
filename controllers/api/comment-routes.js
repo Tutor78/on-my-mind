@@ -6,13 +6,22 @@ router.get('/', (req, res) => {
     // logic to get all comments
     Comment.findAll({
         attributes: [
+            'id',
             'comment_content',
             'created_at'
         ],
         include: [
             {
+                model: User,
+                attributes: [
+                    'id',
+                    'username'
+                ]
+            },
+            {
                 model: Post,
                 attributes: [
+                    'id',
                     'title',
                     'post_content',
                     'created_at'
@@ -21,15 +30,10 @@ router.get('/', (req, res) => {
                     {
                         model: User,
                         attributes: [
+                            'id',
                             'username'
                         ]
                     }
-                ]
-            },
-            {
-                model: User,
-                attributes: [
-                    'username'
                 ]
             }
         ]
