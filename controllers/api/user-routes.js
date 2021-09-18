@@ -163,8 +163,11 @@ router.post('/', (req, res) => {
             "password": "supersecurepassword"
         }
     */
-    
-    User.create(req.body)
+    User.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    })
     .then(dbUserData => {
         req.session.save(() => {
             req.session.user_id = dbUserData.id;

@@ -1,0 +1,15 @@
+nav .navbar-brand {
+    font-size: 1.75rem;
+}
+
+nav li .btn {
+    font-size: 1.5rem;;
+}
+
+.card .card-body p {
+    text-indent: 15px;
+}
+
+footer {
+    font-size: 1.25rem;
+}
