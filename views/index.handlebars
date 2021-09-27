@@ -1,13 +1,10 @@
 {{#each posts}}
-<div class="mx-3 mt-4 card">
-  <div class="card-header text-center">
-    <a href="#">{{title}}</a>
-  </div>
-  <div class="card-body">
-    <p class="card-text">{{post_content}}</p>
+<div class="mx-3 my-3 card">
+  <div class="card-body text-center">
+    <a href="/post/{{id}}">{{title}}</a>
   </div>
   <div class="card-footer text-muted text-center">
-    Created By: {{user.username}} | {{created_at}} | {{comments.length}} Comment(s)
+    Created By: {{user.username}} | {{format_date created_at}} | {{comments.length}} {{format_plural 'comment' comments.length}}
   </div>
 </div>
 {{/each}}

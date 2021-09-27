@@ -110,7 +110,11 @@ router.post('/', (req, res) => {
         }
     */
 
-    Post.create(req.body)
+    Post.create({
+        title: req.body.title,
+        post_content: req.body.postContent,
+        user_id: req.session.user_id
+    })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
         console.log(err);
@@ -121,7 +125,11 @@ router.post('/', (req, res) => {
 // PUT /api/posts/:id
 router.put('/:id', (req, res) => {
     // logic to update a post
-    Post.update(req.body, {
+    Post.update({
+        title: req.body.title,
+        post_content: req.body.postContent
+    }, 
+    {
         where: {
             id: req.params.id
         }

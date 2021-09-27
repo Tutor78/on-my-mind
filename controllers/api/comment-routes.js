@@ -56,7 +56,11 @@ router.post('/', (req, res) => {
             "post_id": 3
         }
     */
-   Comment.create(req.body)
+   Comment.create({
+       comment_content: req.body.comment_content,
+       user_id: req.session.user_id,
+       post_id: req.body.post_id
+   })
    .then(dbCommentData => res.json(dbCommentData))
    .catch(err => {
        console.log(err);

@@ -1,0 +1,71 @@
+<div class="mx-3 my-3 card">
+  <div class="card-header text-center">
+    <a href="#">{{post.title}}</a>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{post.post_content}}</p>
+  </div>
+  <div class="card-footer text-center text-muted">
+    Created By: {{post.user.username}} | {{format_date post.created_at}} 
+  </div>
+</div>
+
+{{#if loggedIn}}
+{{#if owner}}
+<div class="text-center">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatePost">Update</button>
+  <button class="btn btn-danger" id="delete-btn">Delete</button>
+</div>
+{{/if}}
+{{/if}}
+
+{{#if loggedIn}}
+<form class="mx-5 text-center comment-form">
+    <div class="my-2 form-group">
+        <label for="comment-content">Comment</label>
+        <textarea class="form-control" id="comment-content" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+{{/if}}
+
+{{#each post.comments}}
+    <div class="mx-5 my-3 card text-center">
+        <div class="card-body">
+            <p class="card-text">{{this.comment_content}}</p>
+        </div>
+        <div class="card-footer text-muted text-center">
+            {{this.user.username}} | {{format_date this.created_at}}
+        </div>
+    </div>
+{{/each}}
+
+<div class="modal fade" id="updatePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLongTitle">New Post</h5>
+      </div>
+      <div class="modal-body">
+        <form class="mx-3 text-center update-form">
+            <div class="my-2 form-group">
+                <label for="post-title">Title</label>
+                <input type="text" class="form-control" id="post-title" value="{{post.title}}">
+            </div>
+            <div class="my-2 form-group">
+                <label for="post-content">Content</label>
+                <textarea class="form-control" id="post-content" rows="5">{{post.post_content}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{#if owner}}
+<script src="/javascript/update.js"></script>
+{{/if}}
+{{/if}}
